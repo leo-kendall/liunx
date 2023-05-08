@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+
+int main(int argc, const char *argv[])
+{
+	pid_t pid;
+	int i;
+
+	for(i = 0;i < 5;i++){
+		pid = fork();
+		if (pid < 0){
+			perror("fork");
+			break;
+		}else if(pid == 0){
+			printf("child process\n");
+			sleep(5);
+		}else{
+			printf("father process\n");
+			sleep(5);
+			break;
+		}
+	}
+
+	sleep(100);
+	return 0;
+}
